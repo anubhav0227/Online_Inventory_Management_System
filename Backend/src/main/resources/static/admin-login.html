@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head><meta charset="utf-8"/><title>Admin Login</title>
+<style>
+  body{display:flex;justify-content:center;align-items:center;height:100vh;font-family:Arial;background:#f7fafc}
+  .c{background:#fff;padding:24px;border-radius:10px;box-shadow:0 6px 18px rgba(0,0,0,0.06);width:360px}
+  input{width:100%;padding:10px;margin:8px 0;border:1px solid #ddd;border-radius:6px}
+  button{width:100%;padding:12px;background:#111827;color:#fff;border:0;border-radius:8px}
+</style>
+</head>
+<body>
+  <div class="c">
+    <h3>Admin Login (root)</h3>
+    <input id="email" placeholder="admin email"/>
+    <input id="pwd" placeholder="password" type="password"/>
+    <button onclick="adminLogin()">Login</button>
+    <p id="m"></p>
+  </div>
+
+<script>
+async function adminLogin(){
+  const username = document.getElementById('email').value;
+  const password = document.getElementById('pwd').value;
+  const res = await fetch('http://localhost:8080/api/auth/login', {
+    method:'POST',
+    headers:{'Content-Type':'application/json'},
+    body: JSON.stringify({username, password})
+  });
+  const j = await res.json();
+  if (res.ok && j.token){
+    localStorage.setItem('token', j.token);
+    document.getElementById('m').innerText = 'Admin logged in';
+    window.location.href = 'admin-dashboard.html';
+  } else {
+    document.getElementById('m').innerText = j.error || JSON.stringify(j);
+  }
+}
+</script>
+</body>
+</html>
