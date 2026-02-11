@@ -1,0 +1,9 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html, body, #root { height: 100%; }
+.fade-in { animation: fadeIn 0.45s ease forwards; opacity: 0 }
+@keyframes fadeIn { to { opacity: 1 } }
+
+

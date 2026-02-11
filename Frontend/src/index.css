@@ -1,0 +1,49 @@
+/* src/index.css - global styles + theme variables (paste & import in main.jsx) */
+
+/* Tailwind base imports (already present in most setups) */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Theme variables — global and easy to override */
+:root{
+  --bg-deep: #0B1220;     /* deep background */
+  --bg-deep-2: #071126;   /* darker shade */
+  --accent: #00D1B2;      /* primary CTA */
+  --accent-soft: #8BE9FF; /* accent soft */
+  --highlight: #2DD4BF;
+  --glass: rgba(255,255,255,0.04);
+  --card-bg: rgba(0,0,0,0.28);
+  --muted: #94a3b8;
+}
+
+/* Body background and text */
+html, body, #root {
+  height: 100%;
+  background: radial-gradient(1200px 400px at 10% 20%, rgba(0,209,178,0.06), transparent 8%),
+              linear-gradient(180deg, var(--bg-deep) 0%, var(--bg-deep-2) 100%);
+  color: #e6eef6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Make all .card-like wrappers use the theme card bg when not explicitly set */
+.card, .app-card, .panel, .dashboard-card {
+  background: var(--card-bg);
+  border-radius: 0.75rem;
+  border: 1px solid rgba(255,255,255,0.06);
+  box-shadow: 0 6px 20px rgba(2,6,23,0.28);
+}
+
+/* Utility helper for forced dark container (use on page wrapper) */
+.page-shell {
+  background: transparent; /* we want page shell to be transparent over gradient */
+  color: inherit;
+}
+
+/* Make Tailwind’s gradient utilities use our variables (optional) */
+.bg-theme-accent { background-color: var(--accent); color: #071126; }
+.text-theme-accent { color: var(--accent); }
+
+/* ensure links / anchors look correct */
+a { color: var(--accent-soft); }
